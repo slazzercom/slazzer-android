@@ -1,0 +1,3 @@
+rootProject.name='Slazzer-Auto-Remove-Image-Background-Android'
+include ':app'
+include ':slazzerlib'

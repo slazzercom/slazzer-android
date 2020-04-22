@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Slazzer</string>
+    <string name="permission_alert">Unfortunately You are Denied Permission to Perform this Operation.</string>
+    <string name="please_wait">Uploading...</string>
+    <string name="out_put_image">Output Image</string>
+    <string name="internet_error">Unable to connect to the internet!</string>
+    <string name="path_error">Image path is null</string>
+    <string name="file_processing">File is processing...</string>
+    <string name="uploading">Uploading... %1$d %%</string>
+</resources>

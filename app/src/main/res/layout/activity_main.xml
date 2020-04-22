@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="#F1F1F1"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBar"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+      >
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:elevation="4dp"
+            android:background="@color/white"
+            android:minHeight="?attr/actionBarSize"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:contentInsetStartWithNavigation="0dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/logo"/>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:layout_marginTop="?attr/actionBarSize"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_margin="16dp"
+            android:layout_height="match_parent"
+            android:animateLayoutChanges="true">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardSource"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/cardview_light_background"
+                app:layout_constraintTop_toTopOf="parent">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/consSourceImage"
+
+
+                    >
+                    <ImageView
+                        android:id="@+id/sourceImage"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_width="match_parent"
+                        android:layout_height="270dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:src="@drawable/placeholder"/>
+
+                    <View
+                        android:id="@+id/viewDiv"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/grey20"
+                        android:layout_marginTop="10dp"
+                        app:layout_constraintTop_toBottomOf="@id/sourceImage"/>
+
+                    <LinearLayout
+                        android:id="@+id/linAction"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="10dp"
+                        android:paddingBottom="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginStart="10dp"
+                        app:layout_constraintTop_toBottomOf="@id/viewDiv">
+
+                        <Button
+                            android:id="@+id/btnCapture"
+                            android:layout_width="0dp"
+                            android:layout_height="44dp"
+                            android:layout_weight="1"
+                            android:background="@drawable/rounded_corner_btn_bg"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:text="Camera"
+                            android:textAllCaps="false"
+                            android:textColor="@color/white"
+                            android:textSize="14sp" />
+
+                        <Button
+                            android:id="@+id/btnChoose"
+                            android:layout_width="0dp"
+                            android:layout_height="44dp"
+                            android:layout_weight="1"
+                            android:paddingTop="10dp"
+                            android:paddingBottom="10dp"
+                            android:textAllCaps="false"
+                            android:textSize="14sp"
+                            android:layout_marginLeft="10dp"
+                            android:background="@drawable/rounded_corner_btn_bg"
+                            android:textColor="@color/white"
+                            android:text="Gallery"
+                            />
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tvOutPut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Output Image"
+                android:paddingTop="10dp"
+                android:textSize="14sp"
+                android:visibility="gone"
+                android:textColor="@color/colorPrimaryDark"
+                android:paddingBottom="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toBottomOf="@+id/cardSource"/>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                app:layout_constraintTop_toBottomOf="@+id/tvOutPut"
+                android:layout_width="match_parent"
+                style="@android:style/Widget.Holo.ProgressBar.Horizontal"
+                android:layout_height="10dp"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="10dp"
+                android:visibility="gone"
+                android:layout_marginTop="10dp"
+                android:progressDrawable="@drawable/progressbar_states"
+                />
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardOutputImage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                app:cardBackgroundColor="@color/cardview_light_background"
+                app:layout_constraintTop_toBottomOf="@+id/progressBar">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="270dp"
+                    android:visibility="gone"
+                    android:id="@+id/consOutputImage"
+                    android:background="@drawable/transperent_bg"
+                    >
+                    <ImageView
+                        android:id="@+id/outPutImage"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_width="match_parent"
+                        android:layout_height="270dp"
+                        android:src="@drawable/placeholder"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.cardview.widget.CardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
