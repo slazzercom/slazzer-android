@@ -74,7 +74,7 @@ Then you can use your image file instaid of inputFile to get output image.
 ### Error code from response
 
 ---
-|Response Code | Response   | Details |
+|Code | Response   | Details |
 |---- | ----------  | --------- |
 |200 | {"output_image_url": "image_url"}   | Successfully removed image background  | 
 |400 | {"error": "Source image file not found"}   | Error: Invalid parameters or unable to process input image file (No credit deducted)  | 
