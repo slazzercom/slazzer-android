@@ -49,10 +49,14 @@ object Slazzer {
         apiRequest.upload(apiKey!!,body)?.enqueue(object : Callback<ResponseBody?> {
             override fun onResponse(call: Call<ResponseBody?>, response: Response<ResponseBody?>) {
                 callback.onProgressEnd()
-                when {
-                    response.body() != null -> {
-                        callback.onSuccess(response.body()!!.string())
+                if (response.code()==200){
+                    when {
+                        response.body() != null -> {
+                            callback.onSuccess(response.body()!!.string())
+                        }
                     }
+                }else{
+                    callback.onError("Error Code ${response.code()}")
                 }
             }
 

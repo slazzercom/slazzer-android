@@ -214,13 +214,10 @@ class MainActivity : AppCompatActivity() {
             override fun onSuccess(response: String) {
                 val jsonObject=JSONObject(response)
                 this@MainActivity.progressBar?.visibility= View.GONE
-                if (jsonObject.optBoolean("status")){
                     consOutputImage?.visibility=View.VISIBLE
                     tvOutPut.text = resources.getString(R.string.out_put_image)
                     Picasso.get().load(jsonObject.optString("output_image_url")).into(outPutImage)
-                }else{
-                    show(jsonObject.optString("message"))
-                }
+
             }
 
             override fun onError(errors: String) {
