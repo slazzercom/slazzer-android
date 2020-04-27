@@ -64,10 +64,10 @@ Then you can use your image file instaid of inputFile to get output image.
 ---
 |key | Request Body   | Rrequired |
 |---- | -----------  | --- |
-|source_image_file | Source image file. Support only PNG, JPG, JPEG.  (string($binary) )  | Mandatory  | 
-|format | Output image format. Default value 'png'. Otherwise 'jpg' for JPG format and 'png' for PNG format. 'png' format support alpha transparency.   |Optional | 
-|bg_color_code | Output with solid background color. Has to be HEX color code. (e.g. #72E4B3, #B3D472).   | Optional  |
-|bg_image_file | Output with image file background. This image will be resize according to the output image file aspect ratio. supported bg_image_file formats are 'png', 'jpg', 'jpeg'.   | Optional |
+|source_image_file (string($binary) ) | Source image file. Support only PNG, JPG, JPEG  | Mandatory  | 
+|format (string) | Output image format. Default value 'png'. Otherwise 'jpg' for JPG format and 'png' for PNG format. 'png' format support alpha transparency.   |Optional | 
+|bg_color_code (string) | Output with solid background color. Has to be HEX color code. (e.g. #72E4B3, #B3D472).   | Optional  |
+|bg_image_file (string($binary) ) | Output with image file background. This image will be resize according to the output image file aspect ratio. supported bg_image_file formats are 'png', 'jpg', 'jpeg'.   | Optional |
 
 #### Importent Note:
 * Use any one background parameter("bg_color_code" or "bg_image_file") at a time when request API
