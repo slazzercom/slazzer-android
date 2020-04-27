@@ -74,4 +74,3 @@ You can get complete sample code from this repository. Download the project and 
 
 ### Author
 slazzercom
-# Slazzer-Automatic-Remove-Image-Background-Android
