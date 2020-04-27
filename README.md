@@ -1,6 +1,6 @@
 # Slazzer-Auto Image Background Remover
 
-* [Slazzer](https://slazzer.com/) provides free service to remove background of any photo. Don't need to do manually it is completely automatic. Just a single click and get output image with no background. It will increase efficiency & boost workflow.
+* [Slazzer](https://slazzer.com/) provides free service to remove background of any photo. Don't need to do manually it is completely automatic process. Just a single click and get output image with no background. It will increase efficiency & boost workflow.
 ![](https://github.com/slazzercom/Slazzer-Automatic-Remove-Image-Background-Android/blob/master/screenshot/slazzer_automatic_background_removal_android_app.gif)
 
 ### Implementation
@@ -28,44 +28,60 @@ Then you can use your image file instaid of inputFile to get output image.
     Slazzer.from(inputFile,object :Slazzer.ResponseCallback{
            
             override fun onProgressStart() {
-               //====== Show your progress loader =======
+               //  will be invoked on progress start 
             }
             
             override fun onSuccess(response: String) {
                  val jsonObject=JSONObject(response)
-                 if (jsonObject.optBoolean("status"))
-                  Picasso.get().load(jsonObject.optString("output_image_url")).into(yourImageView)
+                Picasso.get().load(jsonObject.optString("output_image_url")).into(yourImageView)
             
-                 else
-                    show(jsonObject.optString("message"))
-                
             }
              override fun onProgressUpdate(percentage: Float) {
                 runOnUiThread {
-                   //====== Display progress percentage =======
+                   //  will be invoked when progress update 
                 }
 
             }
             
             override fun onProgressEnd() {
-               //====== Hide your progress loader =======
+              //  will be invoked when progress end 
             }
             
             override fun onError(errors: String) {
-                //====== Hide loader display error action =======
+               //  will be invoked when error occurred
             }
     })
     
+### Request Header
+
+---
+|key | Request Body   | Rrequired |
+|---- | -----------  | --- |
+|API-KEY | Enter your  [API-KEY](https://slazzer.com/api)  | Mandatory  | 
+
+### Request Parameter
+
+---
+|key | Request Body   | Rrequired |
+|---- | -----------  | --- |
+|source_image_file | Source image file. Support only PNG, JPG, JPEG.  (string($binary) )  | Mandatory  | 
+|format | Output image format. Default value 'png'. Otherwise 'jpg' for JPG format and 'png' for PNG format. 'png' format support alpha transparency.   |Optional | 
+|bg_color_code | Output with solid background color. Has to be HEX color code. (e.g. #72E4B3, #B3D472).   | Optional  |
+|bg_image_file | Output with image file background. This image will be resize according to the output image file aspect ratio. supported bg_image_file formats are 'png', 'jpg', 'jpeg'.   | Optional |
+
+#### Importent Note:
+* Use any one background parameter("bg_color_code" or "bg_image_file") at a time when request API
 ### Error code from response
 
 ---
-|Response Code | Response | Details |
-|---- | ---------- | 
-|200     | "output_image_url": "image_url" | Successfully removed image background | 
-|400    | "error": "Source image file not found" | Error: Invalid parameters or unable to process input image file (No credit deducted) | 
-|401   | "error": "invalid api key"  | Error: API-KEY missing or invalid API-KEY (No credit deducted) |
-|402   | "error": "No credits remaining" | Error: No credits remaining (No credit deducted) |
-|403   |"error": "Api rate limit crossed" | Error: Api rate limit crossed (No credit deducted)  |
+|Response Code | Response   | Details |
+|---- | ----------  | --------- |
+|200 | {"output_image_url": "image_url"}   | Successfully removed image background  | 
+|400 | {"error": "Source image file not found"}   | Error: Invalid parameters or unable to process input image file (No credit deducted)  | 
+|401 | {"error": "invalid api key"}   | Error: API-KEY missing or invalid API-KEY (No credit deducted)  |
+|402 | {"error": "No credits remaining"}   | Error: No credits remaining (No credit deducted) |
+|429 | {"error": "Api rate limit crossed"}   | Error: Api rate limit crossed (No credit deducted) |
+
 ### Sample Project
 You can get complete sample code from this repository. Download the project and replace your [API-KEY](https://slazzer.com/api)
 
