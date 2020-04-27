@@ -59,16 +59,13 @@ Then you can use your image file instaid of inputFile to get output image.
 ### Error code from response
 
 ---
-|Error Code | Response Message    |
+|Response Code | Response | Details |
 |---- | ---------- | 
-|501     | Invalid api key      | 
-|502    | No credit | 
-|503   | Source image file not found        | 
-|504   | Wrong output format        | 
-|505   | Invalid background color code format        | 
-|506   | Api limit crossed        | 
-|507   | Source image file can not be greater than 12mb        
-
+|200     | "output_image_url": "image_url" | Successfully removed image background | 
+|400    | "error": "Source image file not found" | Error: Invalid parameters or unable to process input image file (No credit deducted) | 
+|401   | "error": "invalid api key"  | Error: API-KEY missing or invalid API-KEY (No credit deducted) |
+|402   | "error": "No credits remaining" | Error: No credits remaining (No credit deducted) |
+|403   |"error": "Api rate limit crossed" | Error: Api rate limit crossed (No credit deducted)  |
 ### Sample Project
 You can get complete sample code from this repository. Download the project and replace your [API-KEY](https://slazzer.com/api)
 
