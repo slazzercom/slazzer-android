@@ -1,6 +1,6 @@
 # Slazzer-Auto Image Background Remover
 
-* [Slazzer](https://slazzer.com/) provides free service to remove background of any photo. Don't need to do manually it is completely automatic process. Just a single click and get output image with no background. It will increase efficiency & boost workflow.
+* [Slazzer](https://slazzer.com/) Is a automatic background removal service
 ![](https://github.com/slazzercom/Slazzer-Automatic-Remove-Image-Background-Android/blob/master/screenshot/slazzer_automatic_background_removal_android_app.gif)
 
 ### Implementation
