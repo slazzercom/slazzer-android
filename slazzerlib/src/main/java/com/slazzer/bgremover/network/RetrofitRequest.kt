@@ -4,7 +4,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object RetrofitRequest {
     private var retrofit: Retrofit? = null
-    private const val BASE_URL = "https://slazzer.com/"
+    private const val BASE_URL = "https://api.slazzer.com"
     val retrofitInstance: Retrofit?
         get() {
             if (retrofit == null) {

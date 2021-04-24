@@ -11,6 +11,6 @@ import retrofit2.http.Part
 
 interface ApiRequest {
     @Multipart
-    @POST("api/v1/remove_image_background")
+    @POST("v2.0/remove_image_background")
     fun upload(@Header("API-KEY") header: String, @Part file: MultipartBody.Part?): Call<ResponseBody?>?
 }

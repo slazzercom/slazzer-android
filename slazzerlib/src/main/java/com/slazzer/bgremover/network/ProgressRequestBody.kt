@@ -29,10 +29,13 @@ class ProgressRequestBody(private val inputFile: File,
             source = inputFile.source()
             var total: Long = 0
             var read: Long = -1
-            while ({ read = source.read(
-                    sink.buffer,
-                    SEGMENT_SIZE
-                ); read }() != -1L) {
+            while (run {
+                    read = source.read(
+                        sink.buffer,
+                        SEGMENT_SIZE
+                    )
+                    read
+                } != -1L) {
                 total += read
                 sink.flush()
                 val percentage = (total * 100f) / contentLength()

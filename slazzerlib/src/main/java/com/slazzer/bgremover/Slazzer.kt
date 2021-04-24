@@ -1,11 +1,11 @@
 package com.slazzer.bgremover
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import com.slazzer.bgremover.network.ApiRequest
 import com.slazzer.bgremover.network.ProgressRequestBody
 import com.slazzer.bgremover.network.RetrofitRequest
-import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.ResponseBody
 import retrofit2.Call
 import retrofit2.Callback
@@ -15,7 +15,7 @@ import java.io.File
 object Slazzer {
     private var apiKey: String? = null
     /**
-     * To initialize the API-KEY. Should be called before calling from method.
+     * To initialize the slazzer API-KEY. Should be called before calling get method.
      */
     fun init(apiKey: String) {
         Slazzer.apiKey = apiKey
@@ -24,8 +24,8 @@ object Slazzer {
     /**
      * To remove image background from the given file.
      */
-    fun from(file: File, callback: ResponseCallback) {
-        require(apiKey != null) { "You must call Slazzer.init before calling Slazzer.from" }
+    fun get(sourceFile: File, callback: ResponseCallback) {
+        require(apiKey != null) { "You must call Slazzer.init before calling Slazzer.get" }
         if(apiKey!!.contains("YOUR-API-KEY")){
             callback.onError("Please enter your api key")
             return
@@ -33,7 +33,7 @@ object Slazzer {
         callback.onProgressStart()
 
         val filePart = ProgressRequestBody(
-            file,
+            sourceFile,
             "image/png",
             object : ProgressRequestBody.ProgressListener {
                 override fun fileTransferred(percentage: Float) {
@@ -43,7 +43,7 @@ object Slazzer {
             })
 
         // val requestFile = file.asRequestBody("image/png".toMediaTypeOrNull())
-        val body: MultipartBody.Part = MultipartBody.Part.createFormData("source_image_file", file.name, filePart)
+        val body: MultipartBody.Part = MultipartBody.Part.createFormData("source_image_file", sourceFile.name, filePart)
         val apiRequest: ApiRequest = RetrofitRequest.retrofitInstance!!.create(ApiRequest::class.java)
 
         apiRequest.upload(apiKey!!,body)?.enqueue(object : Callback<ResponseBody?> {
@@ -52,11 +52,23 @@ object Slazzer {
                 if (response.code()==200){
                     when {
                         response.body() != null -> {
-                            callback.onSuccess(response.body()!!.string())
+                                val bmp = BitmapFactory.decodeStream(response.body()!!.byteStream())
+                                callback.onSuccess(bmp)
                         }
                     }
                 }else{
-                    callback.onError("Error Code ${response.code()}")
+                    when {
+                        response.code() != 401 -> callback.onError("Error Code ${response.code()}")
+                        else -> callback.onError("Invalid api key")
+                    }
+                    when {
+                        response.code() != 402 -> callback.onError("Error Code ${response.code()}")
+                        else -> callback.onError("No credits remaining")
+                    }
+                    when {
+                        response.code() != 429 -> callback.onError("Error Code ${response.code()}")
+                        else -> callback.onError("Api rate limit crossed")
+                    }
                 }
             }
 
@@ -72,7 +84,7 @@ object Slazzer {
         fun onProgressStart()
         fun onProgressEnd()
         fun onProgressUpdate(percentage: Float)
-        fun onSuccess(response: String)
+        fun onSuccess(response: Bitmap)
         fun onError(errors: String)
     }
 }

@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.ContentUris
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
@@ -187,7 +188,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun uploadImage(inputFilePath: String) {
         val inputFile = File(inputFilePath)
-        Slazzer.from(inputFile,object :Slazzer.ResponseCallback{
+        Slazzer.get(inputFile,object :Slazzer.ResponseCallback{
             override fun onProgressStart() {
                 this@MainActivity.progressBar?.visibility= View.VISIBLE
                 tvOutPut?.visibility= View.VISIBLE
@@ -211,12 +212,12 @@ class MainActivity : AppCompatActivity() {
 
             }
 
-            override fun onSuccess(response: String) {
-                val jsonObject=JSONObject(response)
+            override fun onSuccess(response: Bitmap) {
                 this@MainActivity.progressBar?.visibility= View.GONE
-                    consOutputImage?.visibility=View.VISIBLE
-                    tvOutPut.text = resources.getString(R.string.out_put_image)
-                    Picasso.get().load(jsonObject.optString("output_image_url")).into(outPutImage)
+                consOutputImage?.visibility=View.VISIBLE
+                tvOutPut.text = resources.getString(R.string.out_put_image)
+                outPutImage?.setImageBitmap(response);
+
 
             }
 
