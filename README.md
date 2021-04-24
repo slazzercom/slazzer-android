@@ -25,16 +25,14 @@ Initialize the SDK in your project label Application class. Find api key from  [
     }
 Then you can use your image file instaid of inputFile to get output image.
 
-    Slazzer.from(inputFile,object :Slazzer.ResponseCallback{
+    Slazzer.get(inputFile,object :Slazzer.ResponseCallback{
            
             override fun onProgressStart() {
                //  will be invoked on progress start 
             }
             
-            override fun onSuccess(response: String) {
-                 val jsonObject=JSONObject(response)
-                Picasso.get().load(jsonObject.optString("output_image_url")).into(yourImageView)
-            
+            override fun onSuccess(response: Bitmap) {
+                 //  will be invoked when progress done
             }
              override fun onProgressUpdate(percentage: Float) {
                 runOnUiThread {
