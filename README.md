@@ -15,7 +15,7 @@ Add it in your project root build.gradel file
 Add it in your app label build.gradel file
 
     dependencies {
-	        implementation 'com.github.slazzercom:slazzer-android:1.0.0'
+	        implementation 'com.github.slazzercom:slazzer-android:v1.0.0'
 	}
 
  ### How to use Slazzer SDK
