@@ -4,9 +4,19 @@
 ![](https://github.com/slazzercom/Slazzer-Automatic-Remove-Image-Background-Android/blob/master/screenshot/slazzer_automatic_background_removal_android_app.gif)
 * [Slazzer](https://slazzer.com/) Is a automatic background removal service just upload an image and get a clear transparent background
 ### Implementation
-Import slazzerlib module library into your project and add below line in your build.gradel file
+Add it in your project root build.gradel file
 
-    implementation project(path: ':slazzerlib')
+    allprojects {
+		repositories {
+			...
+			maven { url 'https://jitpack.io' }
+		}
+	}
+Add it in your app label build.gradel file
+
+    dependencies {
+	        implementation 'com.github.slazzercom:slazzer-android:1.0.0'
+	}
 
  ### How to use Slazzer SDK
 Initialize the SDK in your project label Application class. Find api key from  [here](https://slazzer.com/api)
