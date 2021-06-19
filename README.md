@@ -73,18 +73,14 @@ Then you can use your image file instaid of inputFile to get output image.
 |key | Request Body   | Rrequired |
 |---- | -----------  | --- |
 |source_image_file (string($binary) ) | Source image file. Support only PNG, JPG, JPEG  | Mandatory  | 
-|format (string) | Output image format. Default value 'png'. Otherwise 'jpg' for JPG format and 'png' for PNG format. 'png' format support alpha transparency.   |Optional | 
-|bg_color_code (string) | Output with solid background color. Has to be HEX color code. (e.g. #72E4B3, #B3D472).   | Optional  |
-|bg_image_file (string($binary) ) | Output with image file background. This image will be resize according to the output image file aspect ratio. supported bg_image_file formats are 'png', 'jpg', 'jpeg'.   | Optional |
 
-#### Importent Note:
-* Use any one background parameter("bg_color_code" or "bg_image_file") at a time when request API
+
 ### Error code from response
 
 ---
 |Code | Response   | Details |
 |---- | ----------  | --------- |
-|200 | {"output_image_url": "image_url"}   | Successfully removed image background  | 
+|200 | You will get binary image data after processed   | Successfully removed image background  | 
 |400 | {"error": "Source image file not found"}   | Error: Invalid parameters or unable to process input image file (No credit deducted)  | 
 |401 | {"error": "invalid api key"}   | Error: API-KEY missing or invalid API-KEY (No credit deducted)  |
 |402 | {"error": "No credits remaining"}   | Error: No credits remaining (No credit deducted) |
